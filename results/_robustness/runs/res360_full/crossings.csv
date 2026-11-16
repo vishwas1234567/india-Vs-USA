@@ -1,0 +1,13 @@
+gate,direction,t_s,track_id
+mid-vertical,L->R,2.87,15
+mid-vertical,L->R,9.43,50
+mid-vertical,R->L,12.73,61
+mid-vertical,R->L,15.13,92
+mid-vertical,R->L,15.57,87
+near-horizontal,toward,20.67,124
+mid-vertical,R->L,19.43,113
+mid-vertical,R->L,22.57,127
+mid-vertical,R->L,23.6,147
+mid-vertical,R->L,23.7,155
+mid-vertical,R->L,22.9,157
+mid-vertical,L->R,23.1,157

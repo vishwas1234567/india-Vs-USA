@@ -1,0 +1,20 @@
+{
+  "Junction 1 (720p)": {
+    "frames": 120,
+    "n_det": 6.991666666666666,
+    "n_tracks": 6.991666666666666,
+    "road_cov": 0.7828750000000001,
+    "lane_conf": 0.5606166666666667,
+    "latency_ms": 39.93666666666666,
+    "ap50_labelled_frames": null
+  },
+  "Junction 2 (360p)": {
+    "frames": 120,
+    "n_det": 1.025,
+    "n_tracks": 1.025,
+    "road_cov": 0.4301250000000001,
+    "lane_conf": 0.4241083333333334,
+    "latency_ms": 29.669166666666666,
+    "ap50_labelled_frames": null
+  }
+}

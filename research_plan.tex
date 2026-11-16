@@ -1,0 +1,193 @@
+% Research and publication plan. Compile: latexmk -pdf research_plan.tex (numbers come from generated/v3_macros.tex)
+\documentclass[11pt,a4paper]{article}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{mathptmx}
+\usepackage{microtype}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{amsmath}
+\usepackage[table]{xcolor}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+\IfFileExists{generated/v3_macros.tex}{\input{generated/v3_macros}}{}
+\graphicspath{{figures/}}
+\setlist{itemsep=1pt,topsep=2pt}
+\setlength{\parskip}{0.35em}\setlength{\parindent}{0pt}
+\pagestyle{fancy}\fancyhf{}\fancyhead[L]{\small Vishwas N -- M.Tech, DECE}\fancyhead[R]{\small Research and publication plan}\fancyfoot[C]{\thepage}
+\newcommand{\done}{\textcolor{green!45!black}{\textbf{Done}}}
+\newcommand{\ready}{\textcolor{orange!80!black}{\textbf{Ready}}}
+\newcommand{\need}{\textcolor{red!70!black}{\textbf{Needs data/GPU}}}
+
+\title{\textbf{Research and Publication Plan}\\[2pt]\large Indian versus US Road Perception, Prediction and Planning:\\ a Reproducible, Quality-Aware Benchmark and Fault-Tolerant Autonomy Stack}
+\author{Vishwas N\\ \small M.Tech, Department of DECE, M.\,S.\ Ramaiah Institute of Technology, Bengaluru}
+\date{\today}
+\begin{document}
+\maketitle
+
+\section{Purpose and status in one page}
+The goal is one technical report and one publishable paper on perception, prediction and planning for Indian roads, supported by a
+cross-dataset benchmark against US data under identical protocols. The codebase (\texttt{irp}, \texttt{iscvd}) already implements the pipeline,
+the metrics, the dataset loaders and a closed-loop simulator; what is still missing is \emph{data and compute}: no IDD, KITTI or BDD100K files and no GPU were available
+while building it, so the Indian-versus-US comparison itself has \textbf{not} been run. This plan states what is done, what is ready to run, and what each remaining experiment needs.
+
+\begin{table}[h]
+\centering\small
+\caption{Evidence available today (all measured, see the report for details).}
+\begin{tabular}{@{}p{4.1cm}p{10.4cm}@{}}
+\toprule
+Area & Result so far \\
+\midrule
+Trajectory forecasting (real tracks) & LSTM ADE \vFcHeldAdeLstm\ versus \vFcHeldAdeCv\ body widths for constant velocity on held-out tracks (\vFcHeldGain\,\% lower; track-bootstrap 95\,\% CI of the difference \vFcHeldCiLo\ to \vFcHeldCiHi); cross-scene \vFcCrossAdeLstm\ versus \vFcCrossAdeCv. Small data (\vFcHeldTracks\ and \vFcCrossTracks\ tracks) from blob tracks, not human labels. \\
+Closed-loop planning (simulation) & FSM+MPC collision rate \vSimFsmMpcColl\ over \vSimEpisodes\ episodes against \vSimFsmLqrColl\ for FSM+LQR; MPC solve \vMpcSolve\,ms. \\
+Redundancy (simulation) & Supervisor lowers collisions under silent faults, e.g.\ dropout \vFaultDropoutPrim\ $\to$ \vFaultDropoutSup; fallback use after a crash \vFaultCrashFallback\ of the time. \\
+CPU runtime & \vRtFpsLow--\vRtFpsHigh\ fps on one CPU core without a deep model (\vRtDevice). \\
+Synthetic checks & Lane F1 1.0 on synthetic scenes; road IoU \vSynRoadIou; motion fallback detector hit rate \vSynMotionHit\ with \vSynMotionFp\ false boxes/frame. Logic only. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Research questions and hypotheses}
+\begin{description}[leftmargin=1.5em]
+\item[RQ1 Domain gap.] How much do detection, drivable-area and lane metrics drop when a model trained on US data is evaluated on Indian data under an identical protocol, and which classes and conditions explain it? \emph{H1:} the drop is largest for classes absent or rare in US data (auto-rickshaw, animals) and for small, occluded two-wheelers.
+\item[RQ2 Quality sensitivity.] How robust are the measurements to low-resolution, compressed Indian camera footage? \emph{H2:} scene-level measures (occupancy, drivable area) are robust; object counts are not (already supported on one clip, Section~5 of the report).
+\item[RQ3 Prediction.] Does a recurrent forecaster beat constant velocity on Indian traffic, and does it transfer across scenes? \emph{H3:} yes for 0.5\,s horizons, with a smaller gain across scenes (supported with small data).
+\item[RQ4 Intent.] Do HMM/recurrent intent estimates improve safety margins for crossing pedestrians and cutting-in autos? \emph{H4:} they raise time-to-collision at equal progress loss (simulation only so far).
+\item[RQ5 Safety architecture.] How much does an independent supervisor reduce collisions under silent perception faults and what does it cost in availability? \emph{H5:} large reduction, with a latched-stop availability cost.
+\item[RQ6 Efficiency.] Which CPU and GPU configurations meet a real-time budget at what accuracy? \emph{H6:} adaptive resolution keeps latency within budget with bounded accuracy loss.
+\end{description}
+
+\section{Contributions that the evidence can support}
+\begin{enumerate}
+\item A \textbf{unified cross-dataset benchmark protocol} (taxonomy mapping, shared-class evaluation, fixed input size and thresholds, cluster bootstrap) for IDD versus KITTI/BDD100K/Cityscapes, implemented in \texttt{iscvd}.
+\item A \textbf{quality-aware evaluation} of classical and learned perception on low-resolution, compressed footage (degradation study, already done on one clip).
+\item \textbf{Trajectory forecasting and intent estimation on Indian traffic}, with NumPy-verified LSTM and HMM and honest small-data statistics.
+\item A \textbf{fault-tolerant stack}: independent supervisor with fault injection, quantified in closed loop.
+\item An \textbf{open, tested, one-command reproducible toolkit}.
+\end{enumerate}
+Do not claim state-of-the-art accuracy, real-road safety, or Indian-versus-US results until Experiments E1--E4 below are run.
+
+\section{Datasets and access}
+\begin{table}[h]
+\centering\small
+\caption{Datasets and their role. Check each licence and citation requirement before use.}
+\begin{tabular}{@{}p{2.4cm}p{3.3cm}p{4.2cm}p{4.2cm}@{}}
+\toprule
+Dataset & Region & Used for & Loader / note \\
+\midrule
+IDD (detection) & Indian roads & Detection, class mix, domain gap & \texttt{ISCVDataset.from\_idd} (Pascal-VOC xml) \\
+IDD (segmentation) & Indian roads & Drivable area, panoptic evidence & \texttt{from\_idd\_segmentation}; verify label-id table \\
+KITTI object & US-style (Germany) road scenes & Detection baseline & \texttt{from\_kitti}; no auto-rickshaw class \\
+BDD100K & US roads & Detection, lanes, drivable area & \texttt{from\_bdd100k}; lane polylines \\
+Cityscapes & European urban & Segmentation reference & \texttt{from\_cityscapes} \\
+Own clips & Bengaluru junctions & Trajectories, flow, degradation & \texttt{data/}; fixed cameras only \\
+Own drive footage & Indian roads, vehicle camera & Lane, road, risk, closed-loop replay & \emph{needed}: any file works with \texttt{irp run} \\
+\bottomrule
+\end{tabular}
+\end{table}
+KITTI is collected in Germany, so it is a ``non-Indian structured-road'' reference; the US comparison relies mainly on BDD100K. State this wording in the paper.
+
+\section{Consistent evaluation protocol}
+\begin{table}[h]
+\centering\small
+\caption{Metrics, implemented in \texttt{iscvd.metrics} and identical for every dataset.}
+\begin{tabular}{@{}p{3.0cm}p{5.6cm}p{5.5cm}@{}}
+\toprule
+Task & Metric & Rule \\
+\midrule
+Detection & AP50, AP50:95 (101-point), per class & Unified taxonomy; all classes and shared classes; no-GT classes excluded, not zero \\
+Drivable area & Binary IoU, mIoU over unified labels & Same label mapping per dataset \\
+Panoptic & PQ, SQ, RQ & Needs instance masks (Cityscapes/IDD polygons) \\
+Tracking & MOTA, IDF1, ID switches (CLEAR-MOT) & Needs sequences with ids (KITTI tracking, BDD MOT, own labels) \\
+Lanes & F1 at a pixel threshold & BDD lanes; Indian lanes need own annotation \\
+Forecasting & ADE, FDE (m or body widths) & Same observation/prediction horizon; track-level bootstrap \\
+Planning (sim) & Collision rate, min gap, min TTC, jerk, progress & Same scenarios and seeds for every stack \\
+Runtime & Latency median/p95, fps, device & Warm-up excluded; hardware stated \\
+\bottomrule
+\end{tabular}
+\end{table}
+\textbf{Fixed settings for every dataset:} same weights, input size (e.g.\ 640), confidence floor 0.001 for AP, NMS IoU 0.45, three repeats for timing, seed list stored in the result files.
+
+\section{Experiment matrix}
+\begin{table}[h]
+\centering\small
+\caption{Experiments, status and requirements.}
+\begin{tabular}{@{}l p{6.4cm} p{2.0cm} p{4.1cm}@{}}
+\toprule
+ID & Experiment & Status & Needs \\
+\midrule
+E1 & Detector (COCO-pretrained YOLOv8) on IDD versus BDD100K/KITTI, all and shared classes & \need & Datasets, GPU or ONNX CPU run \\
+E2 & Fine-tune on IDD; evaluate on IDD and BDD100K (domain gap, forgetting) & \need & Datasets, GPU training \\
+E3 & Drivable area: SegFormer (Cityscapes) versus IDD fine-tune, IDD versus Cityscapes/BDD & \need & Datasets, GPU \\
+E4 & Class-wise error analysis for auto-rickshaw, two-wheeler, animal & \need & E1 outputs \\
+E5 & Degradation robustness of learned detectors (extends the existing classical study) & \ready & Any detector weights \\
+E6 & Lane detection: classical BEV method on BDD lanes and on annotated Indian footage & \ready & BDD lanes; Indian annotation (about 200 frames) \\
+E7 & Tracking: blob tracker versus YOLO+tracker, CLEAR-MOT on annotated clip & \ready & 100--300 annotated frames \\
+E8 & Trajectory forecasting: LSTM versus baselines, more clips and horizons & \done\ (small data) & More tracks, detector-based tracks \\
+E9 & Intent HMM on labelled real events & \ready & Event labels (crossing/cut-in) \\
+E10 & Closed-loop benchmark: stacks, scenarios, ablations (intent, MPC, RL) & \done\ (simulation) & Replay of real scenarios for realism \\
+E11 & Fault injection: supervisor on/off & \done\ (simulation) & HIL or log replay to validate \\
+E12 & CPU/GPU runtime: stages, resolution, FP16, ONNX & \done\ (CPU only) & GPU measurements \\
+E13 & Indian versus US comparison video and summary table & tool \done & E1 outputs or any two sources \\
+E14 & Deep RL planner versus tabular Q-learning versus FSM & \ready & PyTorch, simulator already in place \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Statistical methodology}
+\begin{itemize}
+\item Report n (images, sequences, tracks) with every number; avoid pooling frames from one sequence as independent samples.
+\item Cluster bootstrap (resample sequences or tracks, 1000 draws) for 95\,\% confidence intervals; paired differences for model comparisons.
+\item Apply Holm correction when many class-wise comparisons are tested; report effect sizes, not only p-values.
+\item Three or more random seeds for every trained model; report mean and spread.
+\item Keep a frozen test split; tune only on validation.
+\end{itemize}
+
+\section{Ablations}
+Shadow suppression, tracker type, enhancement mode, input resolution, taxonomy mapping choices (rider handling, vehicle fallback), intent on/off, MPC versus LQR, MPC horizon,
+supervisor thresholds, and LSTM size/horizon.
+
+\section{Technical report and paper structure}
+\begin{description}[leftmargin=1.5em]
+\item[Paper (8 pages, two columns).] Abstract; Introduction (problem, three contributions, honest scope); Related work; Benchmark protocol and datasets; Method (perception, prediction, planning, safety); Experiments E1--E12; Discussion and limits; Conclusion.
+\item[Figures.] (1) Architecture; (2) class-mix and box-size comparison Indian versus US; (3) per-class AP bars with CIs; (4) degradation curves; (5) forecasting ADE per horizon; (6) closed-loop collision bars with and without supervisor; (7) qualitative frames from the comparison video.
+\item[Tables.] Dataset statistics; AP all/shared classes; drivable IoU and lane F1; tracking; forecasting; planning stacks; fault injection; runtime.
+\item[Technical report.] The project report keeps the full implementation, equations, code listings and every experiment, with Completed and Planned kept apart.
+\end{description}
+Possible venues (verify scope and deadlines): IEEE ITSC, IEEE IV, and journals such as IEEE T-ITS or Transportation Research Part C for the extended version.
+
+\section{Eight-week schedule}
+\begin{table}[h]
+\centering\small
+\begin{tabular}{@{}lp{13.2cm}@{}}
+\toprule
+Week & Work \\
+\midrule
+1 & Obtain datasets; verify loaders and label-id tables on the real files; run \texttt{irp dataset stats} and the Indian-versus-US statistics comparison. \\
+2 & E1: baseline detector on all datasets (ONNX on CPU or GPU); lock protocol and seeds. \\
+3 & E2--E4: IDD fine-tuning, class-wise analysis. \\
+4 & E3 and E6: drivable area and lanes; annotate about 200 Indian frames. \\
+5 & E7--E9: annotated tracking evaluation; more trajectories; intent event labels. \\
+6 & E5, E12: robustness and GPU runtime; E13 comparison video. \\
+7 & E10, E11, E14: closed-loop and fault-injection refinements, deep RL. \\
+8 & Write paper and report, regenerate all tables with \texttt{make all}, internal review, release. \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Risks and mitigations}
+\begin{itemize}
+\item \textbf{Label-definition mismatches} between datasets: freeze the mapping, run sensitivity on alternatives, publish the table.
+\item \textbf{Simulation-to-reality gap:} label all planning results as simulation; replay real tracks as scenarios; plan hardware-in-the-loop.
+\item \textbf{Small real data:} use cluster bootstrap, report wide intervals, collect more clips.
+\item \textbf{No GPU:} use ONNX CPU inference for E1, rent GPU time for E2--E3.
+\item \textbf{Privacy and licences:} blur faces and number plates in any released video; respect dataset licences and citations.
+\item \textbf{Over-claiming:} keep the claims list in Section~3 and update it only when an experiment supports it.
+\end{itemize}
+
+\section{Reproducibility checklist}
+{\sloppy Code and tests in the repository; \texttt{make all} regenerates every table and figure; parameters stored in \texttt{params.json}; seeds fixed; hardware and library versions recorded; datasets referenced by version; no manually typed numbers in the manuscript (macros are generated).\par}
+
+\end{document}

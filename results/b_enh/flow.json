@@ -1,0 +1,122 @@
+{
+  "gates": [
+    {
+      "name": "mid-vertical",
+      "p1": [
+        0.5,
+        0.4
+      ],
+      "p2": [
+        0.5,
+        1.0
+      ],
+      "labels": [
+        "L->R",
+        "R->L"
+      ]
+    },
+    {
+      "name": "near-horizontal",
+      "p1": [
+        0.0,
+        0.8
+      ],
+      "p2": [
+        1.0,
+        0.8
+      ],
+      "labels": [
+        "away",
+        "toward"
+      ]
+    }
+  ],
+  "counts": {
+    "mid-vertical": {
+      "R->L": 97,
+      "L->R": 13
+    },
+    "near-horizontal": {
+      "away": 26,
+      "toward": 59
+    }
+  },
+  "headway": {
+    "mid-vertical": {
+      "n": 110,
+      "mean_s": 1.02,
+      "median_s": 0.33,
+      "p90_s": 1.49
+    },
+    "near-horizontal": {
+      "n": 85,
+      "mean_s": 0.9,
+      "median_s": 0.27,
+      "p90_s": 1.72
+    }
+  },
+  "bin_counts_10s": {
+    "mid-vertical": [
+      1,
+      15,
+      22,
+      27,
+      23,
+      12,
+      2,
+      1,
+      2,
+      3,
+      0,
+      2
+    ],
+    "near-horizontal": [
+      0,
+      24,
+      13,
+      17,
+      16,
+      2,
+      10,
+      2,
+      0,
+      1,
+      0,
+      0
+    ]
+  },
+  "bursts": {
+    "bursts": [
+      {
+        "start_s": 13.67,
+        "end_s": 45.5,
+        "peak": 0.3282
+      },
+      {
+        "start_s": 48.63,
+        "end_s": 54.4,
+        "peak": 0.0952
+      },
+      {
+        "start_s": 65.53,
+        "end_s": 67.87,
+        "peak": 0.2558
+      },
+      {
+        "start_s": 76.33,
+        "end_s": 80.47,
+        "peak": 0.1527
+      },
+      {
+        "start_s": 114.87,
+        "end_s": 118.33,
+        "peak": 0.2086
+      }
+    ],
+    "n": 5,
+    "threshold": 0.0584,
+    "mean_duration_s": 9.51,
+    "mean_interval_s": 25.3,
+    "interval_cv": 0.463
+  }
+}

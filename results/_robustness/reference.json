@@ -1,0 +1,6 @@
+{
+  "tracks": 46,
+  "occ_mean_pct": 9.56,
+  "tracker": "kalman",
+  "source": "data/junction_clip.mp4"
+}

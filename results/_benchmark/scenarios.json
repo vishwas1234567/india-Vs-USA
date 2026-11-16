@@ -1,0 +1,30 @@
+{
+  "clean": {
+    "p_miss": 0.0,
+    "jitter": 1.0,
+    "gap_prob": 0.0,
+    "fp_rate": 0.0,
+    "n_objects": 8
+  },
+  "missed": {
+    "p_miss": 0.15,
+    "jitter": 2.0,
+    "gap_prob": 0.3,
+    "fp_rate": 0.1,
+    "n_objects": 8
+  },
+  "occluded": {
+    "p_miss": 0.15,
+    "jitter": 3.0,
+    "gap_prob": 0.7,
+    "fp_rate": 0.2,
+    "n_objects": 8
+  },
+  "dense": {
+    "p_miss": 0.15,
+    "jitter": 3.0,
+    "gap_prob": 0.7,
+    "fp_rate": 0.2,
+    "n_objects": 20
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "fsm+lqr (no intent)": {
+    "episodes": 100,
+    "collision_rate": 0.03,
+    "min_gap_median_m": 1.406447182890938,
+    "min_ttc_median_s": 3.403507958928333,
+    "mean_jerk": 4.713659639635028,
+    "progress_mean_m": 105.19178347166353,
+    "solve_ms_mean": 0.0,
+    "degraded_frac": 0.0,
+    "per_scenario_collision": {
+      "ped_cross": 0.15,
+      "auto_cut_in": 0.0,
+      "two_wheeler_weave": 0.0,
+      "stopped_vehicle": 0.0,
+      "lead_brake": 0.0
+    },
+    "scenarios": [
+      "ped_cross",
+      "auto_cut_in",
+      "two_wheeler_weave",
+      "stopped_vehicle",
+      "lead_brake"
+    ]
+  },
+  "fsm+lqr+intent": {
+    "episodes": 100,
+    "collision_rate": 0.03,
+    "min_gap_median_m": 1.4071584056038853,
+    "min_ttc_median_s": 4.789667777647993,
+    "mean_jerk": 5.134775070951375,
+    "progress_mean_m": 76.58471600187411,
+    "solve_ms_mean": 0.0,
+    "degraded_frac": 0.0,
+    "per_scenario_collision": {
+      "ped_cross": 0.15,
+      "auto_cut_in": 0.0,
+      "two_wheeler_weave": 0.0,
+      "stopped_vehicle": 0.0,
+      "lead_brake": 0.0
+    },
+    "scenarios": [
+      "ped_cross",
+      "auto_cut_in",
+      "two_wheeler_weave",
+      "stopped_vehicle",
+      "lead_brake"
+    ]
+  },
+  "rl+lqr+intent": {
+    "episodes": 100,
+    "collision_rate": 0.01,
+    "min_gap_median_m": 14.005617771267936,
+    "min_ttc_median_s": 6.095518101740582,
+    "mean_jerk": 8.875420166823556,
+    "progress_mean_m": 57.65057071368813,
+    "solve_ms_mean": 0.0,
+    "degraded_frac": 0.0,
+    "per_scenario_collision": {
+      "ped_cross": 0.05,
+      "auto_cut_in": 0.0,
+      "two_wheeler_weave": 0.0,
+      "stopped_vehicle": 0.0,
+      "lead_brake": 0.0
+    },
+    "scenarios": [
+      "ped_cross",
+      "auto_cut_in",
+      "two_wheeler_weave",
+      "stopped_vehicle",
+      "lead_brake"
+    ]
+  },
+  "fsm+mpc+intent": {
+    "collision_rate": 0.0,
+    "min_gap_median_m": 5.679401315762618,
+    "min_ttc_median_s": 8.239595743756809,
+    "mean_jerk": 4.857213882250465,
+    "progress_mean_m": 75.49348462177142,
+    "solve_ms_mean": 49.171797568571385,
+    "degraded_frac": 0.0,
+    "episodes": 100,
+    "per_scenario_collision": {
+      "ped_cross": 0.0,
+      "auto_cut_in": 0.0,
+      "two_wheeler_weave": 0.0,
+      "stopped_vehicle": 0.0,
+      "lead_brake": 0.0
+    },
+    "scenarios": [
+      "ped_cross",
+      "auto_cut_in",
+      "two_wheeler_weave",
+      "stopped_vehicle",
+      "lead_brake"
+    ]
+  }
+}

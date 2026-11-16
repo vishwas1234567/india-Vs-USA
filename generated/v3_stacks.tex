@@ -1,0 +1,10 @@
+\begin{tabular}{@{}lccccccc@{}}
+\toprule
+Stack & Episodes & Collision rate & Min gap (m) & Min TTC (s) & Jerk (m/s$^3$) & Progress (m) & MPC solve (ms) \\
+\midrule
+fsm+lqr (no intent) & 100 & 0.03 & 1.41 & 3.40 & 4.71 & 105.2 & -- \\
+fsm+lqr+intent & 100 & 0.03 & 1.41 & 4.79 & 5.13 & 76.6 & -- \\
+rl+lqr+intent & 100 & 0.01 & 14.01 & 6.10 & 8.88 & 57.7 & -- \\
+fsm+mpc+intent & 100 & 0.00 & 5.68 & 8.24 & 4.86 & 75.5 & 49 \\
+\bottomrule
+\end{tabular}

@@ -1,0 +1,12 @@
+id,t_start,t_end,direction,disp_px,rel_size,body_widths_per_s
+10,1.2,1.6,right->left,90,0.779,7.43
+1,1.0,1.9,right->left,99,0.584,0.91
+4,1.0,2.2,right->left,115,0.548,1.94
+9,1.1,2.5,left->right,171,1.491,2.54
+7,1.0,2.7,left->right,68,1.161,1.58
+14,1.7,3.0,left->right,113,1.361,3.06
+19,2.4,3.1,right->left,90,1.131,1.4
+6,1.0,3.6,toward camera,92,0.252,1.51
+5,1.0,4.1,left->right,154,1.916,0.78
+2,1.0,5.0,right->left,123,1.585,0.97
+3,1.0,4.8,left->right,370,1.905,3.36

@@ -1,0 +1,25 @@
+{
+  "source": "data/junction2_360p.mp4",
+  "width": 640,
+  "height": 360,
+  "fps": 30.0,
+  "frames": 3564,
+  "duration_s": 118.8,
+  "file_mb": 7.94,
+  "bits_per_pixel": 0.0774,
+  "sharpness_lap_var_640": 2280.7823,
+  "noise_sigma": 3.0253,
+  "blockiness": 1.0693,
+  "brightness_mean": 122.9541,
+  "contrast_std": 74.5681,
+  "overexposed_frac": 0.11,
+  "underexposed_frac": 0.0376,
+  "temporal_noise_median_absdiff": 0.0,
+  "jitter_px_rms": 0.0171,
+  "samples": 40,
+  "flags": [
+    "low_resolution",
+    "noisy",
+    "glare_or_clipping"
+  ]
+}

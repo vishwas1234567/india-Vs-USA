@@ -1,0 +1,64 @@
+{
+  "lanes": {
+    "straight": {
+      "F1": 1.0,
+      "ego_offset_abs_err_m": 0.03331737233890856,
+      "source": "markings",
+      "ms": 35.63929859999746,
+      "runs": 5
+    },
+    "curved (c=0.002)": {
+      "F1": 1.0,
+      "ego_offset_abs_err_m": 0.05734597410604941,
+      "source": "markings",
+      "ms": 14.766783400003192,
+      "runs": 5
+    },
+    "ego offset 0.5 m": {
+      "F1": 1.0,
+      "ego_offset_abs_err_m": 0.033332341027605704,
+      "source": "markings",
+      "ms": 17.102642399999013,
+      "runs": 5
+    },
+    "faded paint (25%)": {
+      "F1": 1.0,
+      "ego_offset_abs_err_m": 0.033147029583028405,
+      "source": "markings",
+      "ms": 18.20933560000242,
+      "runs": 5
+    },
+    "glare": {
+      "F1": 1.0,
+      "ego_offset_abs_err_m": 0.03328056848780048,
+      "source": "markings",
+      "ms": 20.042538999996395,
+      "runs": 5
+    },
+    "noise sigma 8": {
+      "F1": 1.0,
+      "ego_offset_abs_err_m": 0.03323058017824801,
+      "source": "markings",
+      "ms": 20.3687661999993,
+      "runs": 5
+    },
+    "no paint + free-space fallback": {
+      "F1": 0.0,
+      "ego_offset_abs_err_m": 0.027632168359390308,
+      "source": "freespace",
+      "ms": 10.999394199996004,
+      "runs": 5
+    }
+  },
+  "road_iou_synthetic": 0.9605240841248304,
+  "motion_detector": {
+    "with moving object": {
+      "object_hit_rate": 1.0,
+      "false_boxes_per_frame": 3.3548387096774195
+    },
+    "no moving object": {
+      "object_hit_rate": null,
+      "false_boxes_per_frame": 5.032258064516129
+    }
+  }
+}

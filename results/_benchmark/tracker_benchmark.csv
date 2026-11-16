@@ -1,0 +1,9 @@
+scenario,tracker,seeds,frag_per_object,frag_per_object_std,id_switches,id_switches_std,purity,purity_std,count_ratio,count_ratio_std,fp_tracks,fp_tracks_std
+clean,greedy,20,1.55,0.451,5.7,5.09,0.881,0.102,0.956,0.06,0.0,0.0
+clean,kalman,20,1.0,0.0,0.0,0.0,0.998,0.009,0.994,0.027,0.0,0.0
+missed,greedy,20,3.294,0.595,29.0,10.784,0.753,0.074,1.125,0.105,0.0,0.0
+missed,kalman,20,1.225,0.267,2.2,2.581,0.983,0.023,1.044,0.091,0.0,0.0
+occluded,greedy,20,4.1,0.929,44.35,19.409,0.718,0.081,1.238,0.167,0.0,0.0
+occluded,kalman,20,1.512,0.353,6.35,5.893,0.938,0.053,1.106,0.127,0.0,0.0
+dense,greedy,20,7.633,0.736,222.05,35.558,0.53,0.041,1.217,0.103,0.0,0.0
+dense,kalman,20,2.12,0.415,30.45,11.311,0.881,0.045,1.14,0.103,0.0,0.0

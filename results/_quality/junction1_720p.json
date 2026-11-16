@@ -1,0 +1,23 @@
+{
+  "source": "data/junction_clip.mp4",
+  "width": 1280,
+  "height": 720,
+  "fps": 30.0,
+  "frames": 724,
+  "duration_s": 24.1,
+  "file_mb": 6.84,
+  "bits_per_pixel": 0.082,
+  "sharpness_lap_var_640": 5080.5748,
+  "noise_sigma": 2.1015,
+  "blockiness": 1.072,
+  "brightness_mean": 120.1624,
+  "contrast_std": 68.9908,
+  "overexposed_frac": 0.0788,
+  "underexposed_frac": 0.0134,
+  "temporal_noise_median_absdiff": 0.0,
+  "jitter_px_rms": 0.0701,
+  "samples": 40,
+  "flags": [
+    "glare_or_clipping"
+  ]
+}

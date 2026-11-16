@@ -1,0 +1,74 @@
+{
+  "frames_total": 724,
+  "frames_analysed": 694,
+  "duration_s": 24.1,
+  "fps": 30.0,
+  "source_size": [
+    1280,
+    720
+  ],
+  "proc_size": [
+    960,
+    540
+  ],
+  "tracker": "kalman",
+  "enhance": "none",
+  "stabilize": false,
+  "road_area_frac": 0.487,
+  "zebra_stripe_candidates": 4,
+  "moving_tracks_confirmed": 47,
+  "police_tracks_excluded": 12,
+  "direction_counts": {
+    "right->left": 28,
+    "left->right": 13,
+    "away from camera": 2,
+    "toward camera": 4
+  },
+  "occupancy_mean": 0.0927,
+  "occupancy_p95": 0.21,
+  "occupancy_peak": {
+    "t_s": 21.77,
+    "value": 0.2723
+  },
+  "mean_tracked_users": 3.33,
+  "police_vest_frame_frac": 0.95,
+  "median_rel_size": 1.051,
+  "rel_size_p10_p90": [
+    0.273,
+    4.395
+  ],
+  "median_speed_body_widths_per_s": 2.28,
+  "track_duration_median_s": 1.5,
+  "crossings": {
+    "mid-vertical": {
+      "R->L": 12,
+      "L->R": 6
+    },
+    "near-horizontal": {
+      "toward": 2
+    }
+  },
+  "headway": {
+    "mid-vertical": {
+      "n": 18,
+      "mean_s": 1.32,
+      "median_s": 0.36,
+      "p90_s": 4.34
+    },
+    "near-horizontal": {
+      "n": 2,
+      "mean_s": 1.17,
+      "median_s": 1.17,
+      "p90_s": 1.17
+    }
+  },
+  "bursts": {
+    "n": 1,
+    "threshold": 0.0727,
+    "mean_duration_s": 11.8,
+    "mean_interval_s": null,
+    "interval_cv": null
+  },
+  "wall_time_s": 33.3,
+  "processing_fps": 21.8
+}

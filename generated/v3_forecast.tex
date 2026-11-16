@@ -1,0 +1,17 @@
+\begin{tabular}{@{}llccccc@{}}
+\toprule
+Test set & Model & ADE (bw) & FDE (bw) & ADE (px@960) & FDE (px@960) & $\Delta$ADE vs CV [95\% CI] \\
+\midrule
+held-out tracks (26 tracks) & zero velocity & 0.933 & 1.585 & 72.8 & 123.4 &  \\
+ & const. vel. (last) & 0.420 & 0.738 & 32.8 & 57.5 &  \\
+ & const. vel. (mean) & 0.422 & 0.740 & 33.2 & 57.6 &  \\
+ & ridge regression & 0.398 & 0.666 & 32.5 & 55.4 &  \\
+ & LSTM (3-seed ensemble) & 0.342 & 0.569 & 28.9 & 49.0 & -0.155\,\ldots\,-0.025 \\
+\midrule
+cross-scene (36 tracks) & zero velocity & 0.764 & 1.199 & 38.9 & 61.2 &  \\
+ & const. vel. (last) & 0.726 & 1.167 & 35.1 & 56.7 &  \\
+ & const. vel. (mean) & 0.606 & 0.948 & 28.4 & 44.5 &  \\
+ & ridge regression & 0.554 & 0.858 & 27.2 & 42.3 &  \\
+ & LSTM (3-seed ensemble) & 0.507 & 0.780 & 25.5 & 40.2 & -0.174\,\ldots\,-0.043 \\
+\bottomrule
+\end{tabular}

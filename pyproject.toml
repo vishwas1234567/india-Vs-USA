@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "indian-road-perception"
+version = "2.0.0"
+description = "Perception toolkit for Indian road scenes: static-camera analysis and vehicle-mounted pipeline"
+requires-python = ">=3.9"
+dependencies = ["numpy>=1.24", "scipy>=1.10", "opencv-python-headless>=4.8", "matplotlib>=3.7"]
+
+[project.optional-dependencies]
+dl = ["torch", "transformers>=4.40", "ultralytics>=8.3", "yt-dlp"]
+
+[project.scripts]
+irp-static = "irp.static:main"
+irp-vehicle = "irp.vehicle:main"
+irp-collect = "irp.collect:main"
+irp = "irp.cli:main"
+irp-compare = "irp.compare:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
